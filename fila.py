@@ -10,14 +10,14 @@ def proximo_tempo(intervalo):
 # Configuração inicial para duas filas em tandem
 filas_config = [
     {
-        "intervalo_chegadas": (2, 5),
-        "intervalo_servico": (3, 5),
-        "num_servidores": 1,
-        "capacidade": 5
+        "intervalo_chegadas": (1, 4),
+        "intervalo_servico": (3, 4),
+        "num_servidores": 2,
+        "capacidade": 3
      },
     {
-        "intervalo_servico": (3, 5),
-        "num_servidores": 2,
+        "intervalo_servico": (2, 3),
+        "num_servidores": 1,
         "capacidade": 5
     }
 ]
