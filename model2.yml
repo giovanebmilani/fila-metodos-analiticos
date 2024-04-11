@@ -39,13 +39,13 @@ queues:
     capacidade: 3
     chegadaMin: 1.0
     chegadaMax: 4.0
-    minService: 3.0
-    maxService: 4.0
+    servicoMin: 3.0
+    servicoMax: 4.0
   FILA2:
     servidores: 1
     capacidade: 5
-    minService: 2.0
-    maxService: 3.0
+    servicoMin: 2.0
+    servicoMax: 3.0
 
 network:
   - source: FILA1

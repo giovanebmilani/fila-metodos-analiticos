@@ -11,7 +11,7 @@ class Evento:
         self.tempo = tempo
 
     def __str__(self):
-        return f'Tipo: {self.tipo} -- Tempo: {self.tempo}'
+        return f'Tipo {self.tipo} -- Tempo {self.tempo}'
 
 class Fila:
     def __init__(self, capacidade, servidores, intervalo_chegada, intervalo_servico) -> None:
@@ -36,14 +36,13 @@ class Fila:
         self.estados[self.status] = self.estados[self.status] + tempo 
 
     def __str__(self) -> str:
-        string = f'capacidade: {self.capacidade}' + '\n'
-        string = string + f'Servidores: {self.servidores}' + '\n'
-        string = string + f'Tempo Chegada: {self.intervalo_chegada}' + '\n'
-        string = string + f'Intervalo Servico: {self.intervalo_servico}' + '\n'
-        string = string + f'Status: {self.status}' + '\n'
-        string = string + f'Perdas: {self.perdas}' + '\n'
-        string = string + f'Estados: {self.estados}'
-
+        string = f'capacidade {self.capacidade}' + '\n'
+        string = string + f'Servidores {self.servidores}' + '\n'
+        string = string + f'Tempo Chegada {self.intervalo_chegada}' + '\n'
+        string = string + f'Intervalo Servico {self.intervalo_servico}' + '\n'
+        string = string + f'Status {self.status}' + '\n'
+        string = string + f'Perdas {self.perdas}' + '\n'
+        string = string + f'Estados {self.estados}'
         return string
 
 class Intervalo:
@@ -175,15 +174,15 @@ class Estatisticas:
     def show_losses(self, queue: Fila):
         print("Perdas:", queue.perdas)
     
-    def report(self):
+    def estatisticas(self):
         filas = [self.simulacao.fila1, self.simulacao.fila2]
         for index, fila in enumerate(filas): 
-            print("********************************************************")
+            print("##################################################")
             print(f"Fila:  Fila{index+1} (G/G/{fila.servidores}/{fila.capacidade})")
             if fila.intervalo_chegada != None:
                 print(f"Chegada: {fila.intervalo_chegada.inicio}..{fila.intervalo_chegada.final}")
             print(f"Servico: {fila.intervalo_servico.inicio}..{fila.intervalo_servico.final}")
-            print("********************************************************")
+            print("##################################################")
             self.show_prob_distribution(fila)
             self.show_losses(fila)
 
@@ -194,7 +193,7 @@ def inicia_fila(config, nome) -> Fila:
 
     capacidade = config_simulacao['capacidade']
     servidores = config_simulacao['servidores']
-    intervalo_servico = Intervalo(config_simulacao['minService'], config_simulacao['maxService'])
+    intervalo_servico = Intervalo(config_simulacao['servicoMin'], config_simulacao['servicoMax'])
 
     if nome == 'FILA1':
         intervalo_chegada = Intervalo(config_simulacao['chegadaMin'], config_simulacao['chegadaMax'])
@@ -214,14 +213,14 @@ def main():
 			"capacidade": 3,
 			"chegadaMin": 1,
 			"chegadaMax": 4,
-			"minService": 3,
-			"maxService": 4
+			"servicoMin": 3,
+			"servicoMax": 4
 			},
 			"FILA2": {
 			"servidores": 1,
 			"capacidade": 5,
-			"minService": 2,
-			"maxService": 3
+			"servicoMin": 2,
+			"servicoMax": 3
 			}
 		},
 		"num_aleatorios": 100000,
@@ -245,7 +244,7 @@ def main():
 
     sim.run()
 
-    Estatisticas(sim).report()
+    Estatisticas(sim).estatisticas()
 
 if __name__ == '__main__':
     main()
